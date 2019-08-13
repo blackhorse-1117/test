@@ -1,21 +1,43 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, StaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+import { ProductCard } from "../components/ProductCard";
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <StaticQuery query={productsQuery}
+      render={data => {
+        return data.allMarkdownRemark.edges.map(product => (<ProductCard data={product} />))
+      }} />
   </Layout>
 )
 
 export default IndexPage
+
+const productsQuery = graphql`
+query {
+    allMarkdownRemark {
+      edges {
+        node {
+          id
+          frontmatter {
+            name
+            image
+            original_price
+            discount_price
+            orange_first
+            orange_second
+            delivery_time
+            purchased
+            available
+            shipment
+          }
+        }
+      }
+    }
+  }
+`;
