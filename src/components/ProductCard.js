@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { graphql } from 'gatsby';
 
 import './custom.css'
 
 export const ProductCard = ({ data }) => {
+
+    const [description, showDescription] = useState(false);
     const product = data.node.frontmatter;
+
     return (
-        <div className='product-card-holder'>
+        <div className='product-card-holder' onClick={_ => {
+            showDescription(!description)
+        }}>
             <h1 className='product-name'>{product.name}</h1>
 
             <div className='product-header'>
@@ -27,11 +32,20 @@ export const ProductCard = ({ data }) => {
 
             <div className='product-body-price'>
                 <span className='product-original-price'><h3>€ {product.discount_price} EUR </h3></span>
-                <span className='product-discount-price'><h4>{product.original_price} (28% sconto)</h4></span>
+                <span className='product-discount-price'><h4>€ {product.original_price} (28% sconto)</h4></span>
             </div>
 
+            {description &&
+                <ul className='product-description'>
+                    {product.description.map(item => (
+                        <li className='product-description-item'>{item}</li>
+                    ))}
+                </ul>
+            }
+
+
             <div className='product-delivery-time'>
-                <span className='title'>Data stimata di spedizione</span><br/>
+                <span className='title'>Data stimata di spedizione</span><br />
                 <span>{product.delivery_time}</span>
             </div>
 

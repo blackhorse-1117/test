@@ -8,6 +8,12 @@
     color: black;
 }
 
+.product-card-holder:hover {
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow:5px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5)
+}
+
 .product-name {
     font-weight: 700;
     font-size: 40px;
@@ -97,6 +103,17 @@
 
 .product-body-price .product-discount-price {
     color: red;
+}
+
+.product-description {
+    margin-bottom: 30px;
+}
+
+.product-description-item {
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+    font-size: 15px;
 }
 
 .product-delivery-time .title {
